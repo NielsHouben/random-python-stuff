@@ -55,6 +55,8 @@ class Voxel(Button):
         if block_pick == 4: voxel = Voxel(position = (self.position + mouse.normal), texture = dirt_texture)   
       if key == "left mouse down":
         destroy(self)
+      if key == "e":
+        self.shake(duration=.1, magnitude=1, speed=.005, direction=(1,1))
         
 class Sky(Entity):
   def __init__(self):
@@ -86,12 +88,17 @@ class Hand(Entity):
 
 for z in range(15):
   for x in range(15):
-    voxel = Voxel(position = (x, 0, z))
+    for y in range(4):
+      voxel = Voxel(position = (x, y, z), texture = random.choice([arm_texture, stone_texture, grass_texture, sky_texture, brick_texture]))
+      
+for z in range(15):
+  for x in range(15):
+      voxel = Voxel(position = (x, 4, z))
     
 
     
 player = FirstPersonController()
-player.y = 1
+player.y = 5
 
 sky = Sky()
 
